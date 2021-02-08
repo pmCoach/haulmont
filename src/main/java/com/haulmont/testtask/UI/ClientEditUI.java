@@ -13,6 +13,7 @@ import com.vaadin.ui.VerticalLayout;
 
 import java.sql.SQLException;
 
+//Данный класс предназначен для возможности создания формы для добавления, удаления, редактирования скиска клиентов
 public class ClientEditUI extends VerticalLayout{
     private ClientService clientService = new ClientService();
     private TextField nameField = new TextField("Имя");
@@ -27,7 +28,7 @@ public class ClientEditUI extends VerticalLayout{
     private Button update = new Button("Изменить");
     private Client client;
     private Binder<Client> binder = new Binder<>();
-
+    
     public ClientEditUI(Client client, ClientView clientView){
         this.client = client;
         setVisible(false);
@@ -39,6 +40,7 @@ public class ClientEditUI extends VerticalLayout{
         addComponents(nameField, secnameField, patronymicField, phone_numberField, email, pasport_numberField, layout);
     }
 
+    //Метод для конфигурации формы для добавления, или редактирования клиента
     public void editConfigure(Client client){
         setVisible(true);
         if (client == null){
@@ -61,6 +63,7 @@ public class ClientEditUI extends VerticalLayout{
         pasport_numberField.setPlaceholder("Введите номер паспорта");
     }
 
+    //Очистка полей в форме
     private void clear(){
         nameField.clear();
         secnameField.clear();
@@ -69,7 +72,8 @@ public class ClientEditUI extends VerticalLayout{
         email.clear();
         pasport_numberField.clear();
     }
-
+    
+    //Метод описывает реализацию для событий кнопок
     private void addClickListeners(ClientView clientView){
         add.addClickListener(event -> {
             try {
@@ -106,6 +110,7 @@ public class ClientEditUI extends VerticalLayout{
         });
     }
 
+    //Метод проверяет поля на пустоту
     private boolean fieldCheck(){
         if (nameField.isEmpty() || secnameField.isEmpty() || patronymicField.isEmpty() || email.isEmpty() || phone_numberField.isEmpty() || pasport_numberField.isEmpty()){
             add.setComponentError(new UserError("Не все поля введены"));
@@ -116,6 +121,7 @@ public class ClientEditUI extends VerticalLayout{
         }
     }
 
+    //Метод помещает в поля формы данные из объекта
     private void setClient(Client client){
         nameField.setValue(client.getName());
         secnameField.setValue(client.getSecname());
@@ -124,7 +130,8 @@ public class ClientEditUI extends VerticalLayout{
         email.setValue(client.getEmail());
         pasport_numberField.setValue(client.getPasportNumber());
     }
-
+    
+    //Добавление записи в базу данных
     private void addClient() throws SQLException {
         Client client = new Client(nameField.getValue(),
                 secnameField.getValue(),
@@ -135,6 +142,7 @@ public class ClientEditUI extends VerticalLayout{
         clientService.addClient(client);
     }
 
+    //Метод предназначен для обновления записи в БД
     private void updateClient(Client client) throws SQLException{
         client.setName(nameField.getValue());
         client.setSecname(secnameField.getValue());
