@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
+//Класс предназначен для взаимодействия с БД
 public class PaymentGraphicService {
     PaymentGraphicDAO factory = Factory.getInstance().getPaymentGraphicDAO();
 
