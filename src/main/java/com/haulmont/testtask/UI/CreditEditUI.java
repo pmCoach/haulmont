@@ -13,6 +13,7 @@ import com.vaadin.ui.VerticalLayout;
 
 import java.sql.SQLException;
 
+//Данный класс предназначен для Добавления, удаления, изменения в списке кредитов
 public class CreditEditUI extends VerticalLayout {
     private TextField creditNameField = new TextField("Наименование кредита");
     private TextField creditPercent = new TextField("Процент по кредиту");
@@ -35,6 +36,7 @@ public class CreditEditUI extends VerticalLayout {
         addComponents(creditNameField, creditPercent, creditLimit, layout);
     }
 
+    //Метод для конфигурации формы для добавления, или редактирования кредита
     public void editConfigure(Credit credit){
         binder.forField(creditNameField).withValidator(field -> field.length() > 0, "Поле не введено")
                 .bind(Credit::getCreditName, Credit::setCreditName);
@@ -64,6 +66,7 @@ public class CreditEditUI extends VerticalLayout {
         creditLimit.setPlaceholder("Введите лимит по кредиту");
     }
 
+    //Метод описывает реализации для кнопок формы
     private void addClickListeners(CreditView creditView){
         cancel.addClickListener(event -> this.setVisible(false));
         add.addClickListener(event -> {
@@ -101,6 +104,7 @@ public class CreditEditUI extends VerticalLayout {
         });
     }
 
+    //Проверка полей на нулевое значение
     private boolean fieldCheck(){
         if (creditNameField.isEmpty() || creditPercent.isEmpty() || creditLimit.isEmpty()){
             add.setComponentError(new UserError("Не все поля введены"));
@@ -110,20 +114,23 @@ public class CreditEditUI extends VerticalLayout {
         return true;
     }
 
+    //Добавление кредита в БД
     private void addCredit() throws SQLException{
         creditService.addCredit(getCredit());
     }
 
+    //Изменение кредита
     private void updateCredit() throws SQLException{
         creditService.updateCredit(getCredit());
     }
 
+    //Очистка полей в форме
     private void clear(){
         creditNameField.clear();
         creditPercent.clear();
         creditLimit.clear();
     }
-
+    
     private Credit getCredit(){
         credit.setCreditName(creditNameField.getValue());
         credit.setPercent(Integer.parseInt(creditPercent.getValue()));
@@ -131,6 +138,7 @@ public class CreditEditUI extends VerticalLayout {
         return credit;
     }
 
+    //Метод помещает в форму значения кредита
     private void setCredit(Credit credit){
         creditNameField.setValue(credit.getCreditName());
         creditPercent.setValue(String.valueOf(credit.getPercent()));
