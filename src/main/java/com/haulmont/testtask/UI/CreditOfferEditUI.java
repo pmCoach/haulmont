@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//Класс предназначен для добавления или редактирования списка в кредитном предложении
 public class CreditOfferEditUI extends VerticalLayout {
     private TextField creditSum = new TextField("Сумма кредита");
     private TextField monthsOfCredit = new TextField("Срок выплаты в месяцах");
@@ -65,6 +66,7 @@ public class CreditOfferEditUI extends VerticalLayout {
     }
 
 
+    //Метод предназначен для добавления или редактирования кредитного предложения
     public void editConfigure(CreditOffer creditOffer){
         setVisible(true);
         try{
@@ -102,6 +104,7 @@ public class CreditOfferEditUI extends VerticalLayout {
         monthsOfCredit.setPlaceholder("Введите срок выплаты");
     }
 
+    //Метод предназначен для обновления комбобоксов после добавления клиентов или кредитов в базу данных
     private void updateSelects() throws SQLException{
         clientSelect.setItems(clientService.getAllClients());
         clientSelect.setItemCaptionGenerator(Client::getInitials);
@@ -119,6 +122,7 @@ public class CreditOfferEditUI extends VerticalLayout {
 
     }
 
+    //Метод описывает реализации для кнопок формы
     private void addClickListeners(){
         calculateSum.addClickListener(clickEvent -> calculateItog());
 
@@ -185,6 +189,7 @@ public class CreditOfferEditUI extends VerticalLayout {
         return true;
     }
 
+    //Метод позволяет посчитать итоговую сумму кредита с учетом процентов
     private void calculateItog(){
         Long creditSum;
         Integer percents;
@@ -199,6 +204,7 @@ public class CreditOfferEditUI extends VerticalLayout {
         itog.setVisible(true);
     }
 
+    //Метод позволяет создать график платежей для кредитного предложения
     private void createPaymentGraphic(){
         List<PaymentGraphic> paymentGraphicList = new ArrayList<>();
         Long ostatok;
@@ -232,16 +238,19 @@ public class CreditOfferEditUI extends VerticalLayout {
     }
 
 
+    //Метод добавляет в БД кредитное предложение
     private void addCreditOffer() throws SQLException{
         creditOffer = getCreditOffer();
         creditOfferService.addCreditOffer(creditOffer);
     }
 
+    //Метод обновляет элемент в списке кредитных предложение
     private void updateCreditOffer() throws SQLException{
         this.creditOffer = getCreditOffer();
         creditOfferService.updateCreditOffer(creditOffer);
     }
 
+    //Метод очищает все поля в форме
     private void clear(){
         clientSelect.clear();
         creditSelect.clear();
