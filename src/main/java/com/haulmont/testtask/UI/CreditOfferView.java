@@ -12,6 +12,7 @@ import com.vaadin.ui.*;
 import java.sql.SQLException;
 import java.util.List;
 
+//Класс предназначен для формирования страницы для работы со списком кредитных предложений
 public class CreditOfferView extends VerticalLayout {
     private Grid<CreditOffer> creditGrid = new Grid<>(CreditOffer.class);
     public Grid<PaymentGraphic> paymentGrid = new Grid<>(PaymentGraphic.class);
@@ -34,16 +35,18 @@ public class CreditOfferView extends VerticalLayout {
     }
 
 
-
+    //Метод обновляет список кредитных предложений
     protected void updateList() throws SQLException{
         List<CreditOffer> creditOffers = creditOfferService.getCreditOfferByCredit(null);
         creditGrid.setItems(creditOffers);
     }
 
+    //Метод так же обновляет список кредитных предложений
     public void updateGrid() throws SQLException{
         creditGrid.setItems(creditOfferService.getAllCreditOffers());
     }
 
+    //Метод для конфигурации списка платежного графика
     public void paymentGridConfigure(List<PaymentGraphic> paymentGraphics) throws SQLException{
         paymentGrid.setWidth("800");
         paymentGrid.setVisible(true);
@@ -56,7 +59,7 @@ public class CreditOfferView extends VerticalLayout {
         paymentGrid.addColumn(column -> column.getOrigDate().toString()).setCaption("Date");
     }
 
-
+    //Метод для конфигурации списка кредитнхы предложений
     private void gridConfigure() throws SQLException {
         creditGrid.setWidth("800");
         creditGrid.removeColumn("client");
