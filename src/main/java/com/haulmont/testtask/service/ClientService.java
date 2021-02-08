@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
+//Класс предназначен для взаимодействия с БД
 public class ClientService {
     private Factory factory = Factory.getInstance();
 
