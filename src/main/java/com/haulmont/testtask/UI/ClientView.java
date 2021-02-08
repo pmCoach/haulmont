@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
+//Класс предназначен для формирования страницы для работой со списком клиентов
 public class ClientView extends VerticalLayout {
     private Grid<Client> clientGrid = new Grid<>(Client.class);
     private TextField filter = new TextField();
@@ -33,6 +34,7 @@ public class ClientView extends VerticalLayout {
         addComponents(layout, gridLayout);
     }
 
+    //Метод конфигурирует поле поиска по ФИО
     private void filterConfigure(){
         filter.addValueChangeListener(e -> {
             try {
@@ -44,16 +46,18 @@ public class ClientView extends VerticalLayout {
         filter.setValueChangeMode(ValueChangeMode.LAZY);
     }
 
+    //Метод обновляет список клиентов
     protected void updateList() throws SQLException{
         List<Client> clients = clientService.getClientsByFIO(filter.getValue());
         clientGrid.setItems(clients);
     }
 
+    //Метод также обновляет список клиентов
     public void updateGrid() throws SQLException{
         clientGrid.setItems(clientService.getAllClients());
     }
 
-
+    //Метод предназначен для конфигурирования списка клиентов
     private void gridConfigure() throws SQLException {
         clientGrid.setWidth("900");
         clientGrid.removeColumn("id");
