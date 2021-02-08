@@ -8,6 +8,7 @@ import com.vaadin.ui.*;
 import java.sql.SQLException;
 import java.util.List;
 
+//Класс предназначен для формирования страницы для работы со списком Кредитов
 public class CreditView extends VerticalLayout {
     private Grid<Credit> creditGrid = new Grid<>(Credit.class);
     private TextField filter = new TextField();
@@ -30,6 +31,7 @@ public class CreditView extends VerticalLayout {
         addComponents(layout, gridLayout);
     }
 
+    //Метод для поиска кредита по названию
     private void filterConfigure(){
         filter.addValueChangeListener(e -> {
             try {
@@ -41,16 +43,18 @@ public class CreditView extends VerticalLayout {
         filter.setValueChangeMode(ValueChangeMode.LAZY);
     }
 
+    //Метод для обновления списка кредитов
     protected void updateList() throws SQLException{
         List<Credit> credits = creditService.getCreditByName(filter.getValue());
         creditGrid.setItems(credits);
     }
 
+    //Так же метод для обновления списка кредитов
     public void updateGrid() throws SQLException{
         creditGrid.setItems(creditService.getAllCredits());
     }
 
-
+    //Метод для конфигурации списка кредитов
     private void gridConfigure() throws SQLException {
         creditGrid.setWidth("900");
         creditGrid.removeColumn("id");
