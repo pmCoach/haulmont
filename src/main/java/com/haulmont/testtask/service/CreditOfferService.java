@@ -9,6 +9,7 @@ import com.haulmont.testtask.backend.hibernate.Factory;
 import java.sql.SQLException;
 import java.util.List;
 
+//Класс предназначен для взаимодействия с БД
 public class CreditOfferService {
     private CreditOfferDAO factory = Factory.getInstance().getCreditOfferDAO();
 
