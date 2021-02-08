@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Класс предназначен для взаимодействия с БД
 public class CreditService {
     CreditDAO factory = Factory.getInstance().getCreditDAO();
 
