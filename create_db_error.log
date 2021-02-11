@@ -1,0 +1,28 @@
+
+-------
+11/55/2021 13:55:25
+-------
+
+Error executing 'INSERT INTO client VALUES("dskjfdsljdf32k", "Алексей", "Скворцов", "Владимирович", "89178139389", "masson@mail.ru", "3423 234343")
+INSERT INTO client VALUES("dskjfasd21jkkk", "Виктор", "Андреев", "Герасимович", "82178139389", "makjk@mail.ru", "3423 231243")
+INSERT INTO client VALUES("dskjfa48jkjkla", "Виктория", "Анохина", "Владимировна", "82178139235", "makdokneks@mail.ru", "2423 231243")
+' (line 3): user lacks privilege or object not found: dskjfdsljdf32k
+
+-------
+11/58/2021 13:58:36
+-------
+
+Error executing 'INSERT INTO credit VALUES("ddslfds0sdfakdj91", "Быстрый", 12000, 12),
+("ddslfdslksdfsdj23", "Срочный", 15000, 25),
+("ddlaeis0sdfakdj12", "Заемный", 50000, 11),
+("ddskjlj0sdfakdj38", "Ипотечный", 1000000, 7) ' (line 4): user lacks privilege or object not found: ddslfds0sdfakdj91
+
+-------
+11/00/2021 14:00:37
+-------
+
+
+-------
+11/00/2021 14:00:55
+-------
+
